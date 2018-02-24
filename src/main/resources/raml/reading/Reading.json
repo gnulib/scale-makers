@@ -1,0 +1,10 @@
+{
+    "title": "Measurement Reading Response Schema",
+    "type": "object",
+    "properties": {
+        "measurement": {
+            "type": "string",
+            "description" : "measurement reading from weigh scale"
+        }
+    }
+}

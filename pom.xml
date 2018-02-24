@@ -20,6 +20,12 @@
     </properties>
 
     <dependencies>
+    		<!-- PI4J (RPi Java library) -->
+		<dependency>
+		    <groupId>com.pi4j</groupId>
+		    <artifactId>pi4j-core</artifactId>
+		   <version>1.1</version>
+		</dependency>
         <!-- Integratingfactor.com client library -->
         <dependency>
             <groupId>com.integratingfactor.idp</groupId>
@@ -153,7 +159,23 @@
         					<jaxrsVersion>2.0</jaxrsVersion>
         					<useJsr303Annotations>false</useJsr303Annotations>
         					<jsonMapper>jackson2</jsonMapper>
-        					<removeOldOutput>true</removeOldOutput>
+        					<removeOldOutput>false</removeOldOutput>
+        				</configuration>
+        			</execution>
+        			<execution>
+        				<id>measurementReadingApi</id>
+        				<goals>
+        					<goal>generate</goal>
+        				</goals>
+        				<phase>generate-sources</phase>
+        				<configuration>
+        					<sourceDirectory>${basedir}/src/main/resources/raml/reading</sourceDirectory>
+        					<outputDirectory>${project.build.directory}/java-gen</outputDirectory>
+        					<basePackageName>com.castlighthealth.device.api.reading</basePackageName>
+        					<jaxrsVersion>2.0</jaxrsVersion>
+        					<useJsr303Annotations>false</useJsr303Annotations>
+        					<jsonMapper>jackson2</jsonMapper>
+        					<removeOldOutput>false</removeOldOutput>
         				</configuration>
         			</execution>
         		</executions>

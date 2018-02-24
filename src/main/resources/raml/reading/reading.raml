@@ -1,0 +1,52 @@
+#%RAML 0.8
+title: Measurement Reading
+version: 1
+protocols: [ HTTPS ]
+baseUri: https://example.base.url/api/v1
+mediaType: application/json
+schemas:
+    - Reading: !include Reading.json
+
+/public/reading:
+    displayName: Public Reading
+    description: |
+        Public API for reading measurement. Does not requires any authentication.
+    get:
+        description: |
+            Get measurement reading response.
+        responses:
+            200:
+                description: measurement reading
+                body:
+                    application/json:
+                        example: !include publicReading200Example.json
+                        schema: Reading
+
+/reading:
+    displayName: Protected Reading
+    description: |
+        Protected API for reading measurement. Requires authorization header.
+    get:
+        description: |
+            Get measurement reading response.
+        headers:
+            Authorization:
+                description: Authorization header with OAuth2 bearer token from iF IDP service
+                example: Bearer 0cb3887a-7f68-490a-bf15-c89aff96a6fb
+        responses:
+            200:
+                description: measurement reading
+                body:
+                    application/json:
+                        example: !include protectedReading200Example.json
+                        schema: Reading
+            401:
+                description: Bearer token authentication failed
+                body:
+                    application/json:
+                        example: !include ../common/401Example.json
+            403:
+                description: token does not have required role to access this resource
+                body:
+                    application/json:
+                        example: !include ../common/403Example.json
