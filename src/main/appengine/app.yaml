@@ -1,0 +1,15 @@
+runtime: custom
+vm: true
+runtime_config:
+   jdk: openjdk8
+module: micro-service-name-here
+threadsafe: true
+handlers:
+- url: /.*
+  script: IGNORED
+  secure: always
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances : 1
+health_check:
+  enable_health_check: False
